@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useContext, createContext, useEffect } from "react";
+import Header from "./Header";
+import C1 from './C1.js';
+
+const AppState = createContext();
 
 function App() {
+  const [data, setData] = useState('Prop Drilling.')
+  const [data2, setData2] = useState('Using Context API.')
+/*
+ Context API  helps use deal with the problem of prop drilling.
+ Prop drilling is when we have pass down a specific data to a multuple nested component.
+ Context api lets use export the data and import it to the component we need it in.
+ It reduces the chances of errors.
+*/
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+      <AppState.Provider value={data2}>
+      <div className="App">
+      <Header/>
+      <C1 data={data} />
     </div>
+      </AppState.Provider>
+      
+    </>
+    
   );
 }
 
 export default App;
+export {AppState};
